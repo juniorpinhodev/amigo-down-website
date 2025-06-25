@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { Menu, X, Heart } from 'lucide-react'
+import Image from 'next/image'
+import { Menu, X } from 'lucide-react'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -36,13 +37,19 @@ export default function Header() {
                     ]
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="w-12 h-12 bg-gradient-to-br from-purple-500 via-pink-500 to-rose-400 rounded-2xl flex items-center justify-center shadow-lg"
+                  className="w-12 h-12 bg-gradient-to-br from-accent-600 via-accent-400 to-accent-200 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden"
                 >
-                  <Heart className="h-6 w-6 text-white" />
+                  <Image
+                    src="/logoAmigoDown.jfif"
+                    alt="Logo Amigo Down"
+                    width={100}
+                    height={100}
+                    className="object-contain"
+                  />
                 </motion.div>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-gradient-to-r from-accent-600 to-secondary-500 bg-clip-text text-transparent">
                   Amigo Down
                 </span>
                 <span className="text-xs text-gray-500 font-medium -mt-1">
@@ -63,11 +70,11 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="relative text-gray-700 hover:text-purple-600 font-medium transition-all duration-300 group"
+                  className="relative text-gray-700 hover:text-secondary-600 font-medium transition-all duration-300 group"
                 >
                   {item.label}
                   <motion.div
-                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300"
+                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary-500 to-accent-500 group-hover:w-full transition-all duration-300"
                     whileHover={{ width: "100%" }}
                   />
                 </Link>
@@ -82,7 +89,7 @@ export default function Header() {
             >
               <Link 
                 href="/doe" 
-                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-3 px-8 rounded-full hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+                className="bg-gradient-to-r from-accent-500 to-secondary-500 text-white font-semibold py-3 px-8 rounded-full hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
               >
                 Doe Agora
               </Link>
