@@ -17,7 +17,7 @@ import {
   Shield,
   Award,
   BarChart3,
-
+  LucideIcon,
   Sparkles,
   Star
 } from 'lucide-react'
