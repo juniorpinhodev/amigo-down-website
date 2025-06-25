@@ -8,25 +8,25 @@ export default function About() {
     {
       icon: Heart,
       title: 'Amor',
-      description: 'Cada criança é única e merece ser amada e respeitada em sua individualidade.',
+      description: 'Cada pessoa é única. Cuidamos com amor genuíno, respeitando a essência de cada criança, adolescente e jovem',
       color: 'from-rose-400 to-pink-500'
     },
     {
       icon: Users,
       title: 'Inclusão',
-      description: 'Trabalhamos por uma sociedade que abraça e valoriza a diversidade.',
+      description: 'Construímos uma sociedade que acolhe, respeita e celebra a diversidade em todas as fases da vida',
       color: 'from-purple-400 to-purple-500'
     },
     {
       icon: Target,
       title: 'Oportunidades',
-      description: 'Criamos caminhos para que cada criança desenvolva seu máximo potencial.',
+      description: 'Desenhamos caminhos reais para que cada pessoa com síndrome de Down floresça e alcance seus sonhos',
       color: 'from-indigo-400 to-blue-500'
     },
     {
       icon: Award,
       title: 'Excelência',
-      description: 'Buscamos sempre a melhor qualidade no atendimento e nos serviços oferecidos.',
+      description: 'Comprometidos com a excelência, entregamos acolhimento e serviços com profissionalismo, cuidado e paixão',
       color: 'from-emerald-400 to-teal-500'
     }
   ]
@@ -72,7 +72,7 @@ export default function About() {
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-100 to-pink-100 px-4 py-2 rounded-full"
               >
                 <Sparkles className="w-5 h-5 text-purple-600" />
-                <span className="text-purple-700 font-medium text-sm">Há mais de 20 anos transformando vidas</span>
+                <span className="text-purple-700 font-medium text-sm">Há mais de 30 anos transformando vidas</span>
               </motion.div>
 
               <motion.h2
