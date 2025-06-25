@@ -33,8 +33,38 @@ export default function Hero() {
   ]
 
   return (
-    <section className="section-padding bg-gradient-to-r mt-12 from-blue-600 to-pink-600 text-white">
-      <div className="max-w-7xl mx-auto text-center">
+    <motion.section 
+      initial={{ 
+        backgroundPosition: 'center 120%',
+        opacity: 0,
+        scale: 1.1
+      }}
+      animate={{ 
+        backgroundPosition: 'center center',
+        opacity: 1,
+        scale: 1
+      }}
+      transition={{ 
+        duration: 1.5,
+        ease: "easeOut"
+      }}
+      className="section-padding bg-gradient-to-r mt-12 text-white relative overflow-hidden"
+      style={{
+        backgroundImage: `url('/hero/hero.png')`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Overlay com gradiente para melhor legibilidade */}
+      <div className="absolute inset-0 bg-gradient-to-r from-accent-500/50 to-secondary-600/50" />
+
+      {/* Efeito glass adicional */}
+      <div className="absolute inset-0 backdrop-blur-[0.15rem]" />
+
+      {/* Pontos decorativos com efeito glass */}
+      <div className="absolute inset-0 overflow-hidden"></div>
+
+      <div className="max-w-7xl mx-auto text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -42,9 +72,9 @@ export default function Hero() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
             Faça Parte da Nossa Missão
-          </h2>
+          </h1>
           <p className="text-xl opacity-90 max-w-3xl mx-auto">
             Existem várias formas de contribuir para um mundo mais inclusivo. 
             Escolha como você pode fazer a diferença hoje mesmo.
@@ -54,7 +84,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
@@ -63,7 +93,7 @@ export default function Hero() {
               key={index}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + index * 0.2, duration: 0.6 }}
+              transition={{ delay: 0.6 + index * 0.2, duration: 0.6 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05, y: -5 }}
               className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300"
@@ -95,6 +125,6 @@ export default function Hero() {
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
