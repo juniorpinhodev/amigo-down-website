@@ -8,32 +8,32 @@ export default function Sobre() {
     {
       year: '1991',
       title: 'Fundação',
-      description: 'Criação da Associação por um grupo de pais dedicados'
+      description: 'Criação da Associação'
     },
     {
-      year: '2012',
-      title: 'Primeiro Centro',
-      description: 'Inauguração do primeiro centro de atendimento especializado'
+      year: '2000',
+      title: 'Breve',
+      description: 'Breve'
     },
     {
-      year: '2015',
-      title: 'Expansão',
-      description: 'Abertura de novas unidades e programas educacionais'
+      year: '2010',
+      title: 'Breve',
+      description: 'Breve'
     },
     {
-      year: '2018',
-      title: 'Reconhecimento',
-      description: 'Prêmio de Excelência em Inclusão Social'
-    },
-    {
-      year: '2021',
-      title: 'Transformação Digital',
-      description: 'Implementação de programas online durante a pandemia'
+      year: '2020',
+      title: 'Breve',
+      description: 'Breve'
     },
     {
       year: '2024',
-      title: 'Presente',
-      description: 'Mais de 500 crianças atendidas e 50 projetos realizados'
+      title: 'Breve',
+      description: 'Breve'
+    },
+    {
+      year: '2025',
+      title: 'Breve',
+      description: 'Breve'
     }
   ]
 
