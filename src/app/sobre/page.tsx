@@ -223,8 +223,6 @@ export default function Sobre() {
                     💙 Porque aqui, Down não é uma limitação.  
                     <br />É só mais uma característica de quem tem muito a ensinar.
                   </p>
-
-
                 </div>
               </motion.div>
             </div>
