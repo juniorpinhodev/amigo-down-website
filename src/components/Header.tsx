@@ -40,16 +40,16 @@ export default function Header() {
                   className="w-12 h-12 bg-gradient-to-br from-accent-600 via-accent-400 to-accent-200 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden"
                 >
                   <Image
-                    src="/logoAmigoDown.jfif"
+                    src="/logoAmigoDown.svg"
                     alt="Logo Amigo Down"
-                    width={100}
-                    height={100}
+                    width={120}
+                    height={120}
                     className="object-contain"
                   />
                 </motion.div>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold bg-gradient-to-r from-accent-600 to-secondary-500 bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-gradient-to-r from-accent-600 to-secondary-400 bg-clip-text text-transparent">
                   Amigo Down
                 </span>
                 <span className="text-xs text-gray-500 font-medium -mt-1">
