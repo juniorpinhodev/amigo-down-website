@@ -40,16 +40,16 @@ export default function Header() {
                   className="w-12 h-12 bg-gradient-to-br from-accent-600 via-accent-400 to-accent-200 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden"
                 >
                   <Image
-                    src="/logoAmigoDown.svg"
+                    src="/logoAmigoDown.jfif"
                     alt="Logo Amigo Down"
-                    width={120}
-                    height={120}
+                    width={100}
+                    height={100}
                     className="object-contain"
                   />
                 </motion.div>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold bg-gradient-to-r from-accent-600 to-secondary-400 bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-gradient-to-r from-accent-600 to-secondary-500 bg-clip-text text-transparent">
                   Amigo Down
                 </span>
                 <span className="text-xs text-gray-500 font-medium -mt-1">
@@ -70,11 +70,11 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="relative text-gray-700 hover:text-secondary-600 font-medium transition-all duration-300 group"
+                  className="relative text-gray-600 hover:text-accent-900 font-medium transition-all duration-300 group"
                 >
                   {item.label}
                   <motion.div
-                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary-500 to-accent-500 group-hover:w-full transition-all duration-300"
+                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary-400 to-accent-600 group-hover:w-full transition-all duration-300"
                     whileHover={{ width: "100%" }}
                   />
                 </Link>
@@ -98,7 +98,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-xl hover:bg-purple-50 transition-colors"
+            className="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Abrir menu"
           >
@@ -107,9 +107,9 @@ export default function Header() {
               transition={{ duration: 0.3 }}
             >
               {isMenuOpen ? (
-                <X className="h-6 w-6 text-purple-600" />
+                <X className="h-6 w-8 text-accent-600" />
               ) : (
-                <Menu className="h-6 w-6 text-purple-600" />
+                <Menu className="h-6 w-8 text-accent-600" />
               )}
             </motion.div>
           </button>
@@ -123,7 +123,7 @@ export default function Header() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden border-t border-purple-100 bg-white/95 backdrop-blur-lg"
+              className="md:hidden border-t border-black bg-white/95 backdrop-blur-lg"
             >
               <div className="py-6 space-y-6">
                 {menuItems.map((item, index) => (
