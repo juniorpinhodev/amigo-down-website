@@ -40,7 +40,7 @@ export default function Header() {
                   className="w-12 h-12 bg-gradient-to-br from-accent-600 via-accent-400 to-accent-200 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden"
                 >
                   <Image
-                    src="/logoAmigoDown.jfif"
+                    src="/logoAmigoDown.svg"
                     alt="Logo Amigo Down"
                     width={100}
                     height={100}
