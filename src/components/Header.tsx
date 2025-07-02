@@ -17,7 +17,7 @@ export default function Header() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg shadow-sm border-b border-purple-100/20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-100/90 backdrop-blur-lg shadow-lg border-b border-purple-100/20">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -37,7 +37,7 @@ export default function Header() {
                     ]
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="w-12 h-12 bg-gradient-to-br from-accent-600 via-accent-400 to-accent-200 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden"
+                  className="w-12 h-12 bg-gradient-to-br from-accent-600 via-accent-400 to-accent-200 rounded-2xl flex items-center justify-center shadow-xl overflow-hidden"
                 >
                   <Image
                     src="/logoAmigoDown.svg"
@@ -98,7 +98,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors"
+            className="md:hidden p-2 rounded-xl hover:bg-gray-200 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Abrir menu"
           >
