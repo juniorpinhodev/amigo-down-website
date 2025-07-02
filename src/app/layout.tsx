@@ -21,6 +21,15 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
   },
+  icons: {
+    icon: '/favicon.ico', 
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png', 
+    other: {
+      rel: 'icon',
+      url: '/favicon.svg',
+    }
+  }
 }
 
 export default function RootLayout({
