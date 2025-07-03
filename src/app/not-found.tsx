@@ -160,14 +160,10 @@ export default function Error404() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleGoHome}
-                className="group bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 relative overflow-hidden text-sm md:text-base flex items-center justify-center space-x-2"
+                className="group bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 relative overflow-hidden text-sm md:text-base flex items-center justify-center space-x-2 hover:from-purple-600 hover:to-pink-600"
               >
-                <Home className="w-5 h-5" />
-                <span>Voltar ao Início</span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  whileHover={{ scale: 1.05 }}
-                />
+                <Home className="w-5 h-5 relative z-10" />
+                <span className="relative z-10">Voltar ao Início</span>
               </motion.button>
 
               <motion.button
