@@ -107,6 +107,16 @@ export default function About() {
               </p>
             </motion.div>
 
+              <motion.div
+              animate={{
+                y: [-8, 10, -8],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-0 -left-10 w-8 h-8 bg-gradient-to-r from-purple-800 to-pink-600 rounded-full opacity-10"
+            />
+
+          
+
 
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -134,34 +144,70 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-8 lg:mt-0"
+            className="relative"
           >
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -4 }}
-                className="group bg-white/80 backdrop-blur-sm p-5 md:p-8 rounded-2xl md:rounded-3xl shadow-lg hover:shadow-xl border border-gray-100/50 text-center transition-all duration-300"
-              >
+            {/* Círculo de fundo */}
+            <motion.div
+              animate={{
+                rotate: [0, 360],
+              }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 w-80 h-80 md:w-96 md:h-96 bg-gradient-to-r from-purple-200/20 to-pink-200/20 rounded-full blur-xl"
+            />
+            
+            {/* Elementos decorativos flutuantes */}
+            <motion.div
+              animate={{
+                y: [-10, 10, -10],
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-10 -left-8 w-6 h-6 bg-gradient-to-r from-purple-700 to-pink-600 rounded-full opacity-10"
+            />
+            <motion.div
+              animate={{
+                y: [10, -10, 10],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-4 -right-6 w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20"
+            />
+            <motion.div
+              animate={{
+                y: [-5, 15, -5],
+              }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-70 -right-12 w-5 h-5 bg-gradient-to-r from-pink-400 to-rose-400 rounded-full opacity-20"
+            />
+            
+            
+            {/* Grid de valores */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-8 lg:mt-0 relative z-10">
+              {values.map((value, index) => (
                 <motion.div
-                  whileHover={{ rotate: 5, scale: 1.1 }}
-                  className={`w-12 md:w-16 h-12 md:h-16 bg-gradient-to-r ${value.color} rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300`}
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.02, y: -4 }}
+                  className="group bg-white/80 backdrop-blur-sm p-5 md:p-8 rounded-2xl md:rounded-3xl shadow-lg hover:shadow-xl border border-gray-100/50 text-center transition-all duration-300"
                 >
-                  <value.icon className="h-6 md:h-8 w-6 md:w-8 text-white" />
+                  <motion.div
+                    whileHover={{ rotate: 5, scale: 1.1 }}
+                    className={`w-12 md:w-16 h-12 md:h-16 bg-gradient-to-r ${value.color} rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300`}
+                  >
+                    <value.icon className="h-6 md:h-8 w-6 md:w-8 text-white" />
+                  </motion.div>
+                  
+                  <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4 group-hover:text-purple-700 transition-colors duration-300">
+                    {value.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                    {value.description}
+                  </p>
                 </motion.div>
-                
-                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4 group-hover:text-purple-700 transition-colors duration-300">
-                  {value.title}
-                </h3>
-                
-                <p className="text-gray-600 leading-relaxed text-sm md:text-base">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>
