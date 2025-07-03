@@ -11,7 +11,7 @@ export default function Hero() {
       title: 'Doar',
       description: 'Sua doação ajuda a manter nossos programas e serviços que transformam vidas.',
       color: 'from-red-500 to-pink-500',
-      href: '/doacao',
+      href: '/doe',
       buttonText: 'Fazer Doação'
     },
     {
@@ -19,7 +19,7 @@ export default function Hero() {
       title: 'Voluntariado',
       description: 'Compartilhe seu tempo e talentos para apoiar nossas atividades e eventos.',
       color: 'from-blue-500 to-cyan-500',
-      href: '/voluntariado',
+      href: '/contatos',
       buttonText: 'Ser Voluntário'
     },
     {
@@ -27,7 +27,7 @@ export default function Hero() {
       title: 'Parcerias',
       description: 'Empresas e organizações podem se tornar parceiras em nossa missão.',
       color: 'from-green-500 to-emerald-500',
-      href: '/parcerias',
+      href: '/contatos',
       buttonText: 'Seja Parceiro'
     }
   ]
