@@ -2,8 +2,14 @@
 
 import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Users, Heart } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Contatos() {
+  const mapRef = useRef(null)
+  const [mapLoaded, setMapLoaded] = useState(false)
+  const [mapError, setMapError] = useState(false)
+  const mapInstanceRef = useRef(null)
+
   const contactInfo = [
     {
       icon: Phone,
@@ -51,6 +57,197 @@ export default function Contatos() {
       contact: 'voluntario@amigodown.org.br'
     }
   ]
+
+  useEffect(() => {
+    const initMap = () => {
+      if (mapRef.current && window.L) {
+        try {
+          // Limpar mapa anterior se existir
+          if (mapInstanceRef.current) {
+            mapInstanceRef.current.remove()
+          }
+
+          // Coordenadas para São José - SC (Rua Nove de Julho, 900)
+          const coordinates = [-27.5969, -48.6394] // [lat, lng] para Leaflet
+
+          // Criar o mapa
+          const map = window.L.map(mapRef.current, {
+            center: coordinates,
+            zoom: 15,
+            zoomControl: true,
+            scrollWheelZoom: true,
+            doubleClickZoom: true,
+            dragging: true
+          })
+
+          // Adicionar camada do OpenStreetMap
+          window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+          }).addTo(map)
+
+          // Criar ícone personalizado
+          const customIcon = window.L.divIcon({
+            html: `
+              <div style="
+                background: linear-gradient(45deg, #3B82F6, #8B5CF6);
+                width: 30px;
+                height: 30px;
+                border-radius: 50% 50% 50% 0;
+                transform: rotate(-45deg);
+                border: 3px solid white;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+                position: relative;
+              ">
+                <div style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%) rotate(45deg);
+                  color: white;
+                  font-size: 14px;
+                  font-weight: bold;
+                ">📍</div>
+              </div>
+            `,
+            className: 'custom-div-icon',
+            iconSize: [30, 30],
+            iconAnchor: [15, 30],
+            popupAnchor: [0, -30]
+          })
+
+          // Criar popup personalizado
+          const popupContent = `
+            <div style="padding: 15px; max-width: 300px; font-family: system-ui, -apple-system, sans-serif;">
+              <h3 style="margin: 0 0 10px 0; color: #1E40AF; font-size: 18px; font-weight: bold;">
+                🏢 Amigo Down SC
+              </h3>
+              <div style="margin: 8px 0; font-size: 14px; color: #374151;">
+                <strong>📍 Endereço:</strong><br>
+                Rua Nove de Julho, 900 - Ipiranga<br>
+                São José - Santa Catarina<br>
+                CEP: 88111-380
+              </div>
+              <div style="margin: 8px 0; font-size: 14px; color: #374151;">
+                <strong>📞 Telefone:</strong> (48) 99170-4881
+              </div>
+              <div style="margin: 8px 0; font-size: 14px; color: #374151;">
+                <strong>🕐 Horário:</strong> Segunda a Sexta: 8h às 18h
+              </div>
+              <div style="margin: 12px 0 0 0;">
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query=Rua+Nove+de+Julho,+900+-+Ipiranga,+São+José+-+Santa+Catarina,+CEP:+88111-380" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style="display: inline-block; background: #3B82F6; color: white; padding: 8px 16px; text-decoration: none; border-radius: 6px; font-size: 12px; font-weight: 500; margin-top: 8px;"
+                >
+                  🗺️ Abrir no Google Maps
+                </a>
+              </div>
+            </div>
+          `
+
+          // Adicionar marcador
+          const marker = window.L.marker(coordinates, { icon: customIcon })
+            .addTo(map)
+            .bindPopup(popupContent)
+            .openPopup()
+
+          // Geocodificação usando Nominatim (OpenStreetMap)
+          const geocodeAddress = async () => {
+            try {
+              const address = encodeURIComponent('Rua Nove de Julho, 900, Ipiranga, São José, Santa Catarina, Brazil')
+              const response = await fetch(
+                `https://nominatim.openstreetmap.org/search?format=json&q=${address}&limit=1&countrycodes=br`
+              )
+              const data = await response.json()
+              
+              if (data && data.length > 0) {
+                const lat = parseFloat(data[0].lat)
+                const lng = parseFloat(data[0].lon)
+                const precisCoordinates = [lat, lng]
+                
+                // Atualizar posição do mapa e marcador
+                map.setView(precisCoordinates, 16)
+                marker.setLatLng(precisCoordinates)
+                
+                console.log('Coordenadas geocodificadas:', precisCoordinates)
+              }
+            } catch (error) {
+              console.log('Geocoding falhou, usando coordenadas padrão:', error)
+            }
+          }
+
+          // Salvar referência do mapa
+          mapInstanceRef.current = map
+
+          // Aguardar carregamento do mapa
+          map.whenReady(() => {
+            setMapLoaded(true)
+            geocodeAddress()
+          })
+
+          // Geocodificar endereço após 1 segundo
+          setTimeout(geocodeAddress, 1000)
+
+        } catch (error) {
+          console.error('Erro ao inicializar o mapa:', error)
+          setMapError(true)
+        }
+      }
+    }
+
+    // Carregar Leaflet se ainda não estiver carregado
+    if (!window.L) {
+      // Carregar CSS do Leaflet
+      const link = document.createElement('link')
+      link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
+      link.rel = 'stylesheet'
+      link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='
+      link.crossOrigin = 'anonymous'
+      document.head.appendChild(link)
+
+      // Carregar JavaScript do Leaflet
+      const script = document.createElement('script')
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
+      script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='
+      script.crossOrigin = 'anonymous'
+      script.async = true
+      script.defer = true
+      
+      script.onload = () => {
+        console.log('Leaflet carregado com sucesso')
+        initMap()
+      }
+      
+      script.onerror = () => {
+        console.error('Erro ao carregar Leaflet')
+        setMapError(true)
+      }
+      
+      document.head.appendChild(script)
+    } else {
+      initMap()
+    }
+
+    // Cleanup
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove()
+        mapInstanceRef.current = null
+      }
+    }
+  }, [])
+
+  const openGoogleMaps = () => {
+    const address = encodeURIComponent("Rua Nove de Julho, 900 - Ipiranga, São José - Santa Catarina, CEP: 88111-380")
+    window.open(`https://www.google.com/maps/search/?api=1&query=${address}`, '_blank')
+  }
+
+  const openAppleMaps = () => {
+    const address = encodeURIComponent("Rua Nove de Julho, 900 - Ipiranga, São José - Santa Catarina, CEP: 88111-380")
+    window.open(`https://maps.apple.com/?q=${address}`, '_blank')
+  }
 
   return (
     <div className="min-h-screen pt-16">
@@ -123,169 +320,6 @@ export default function Contatos() {
         </div>
       </section>
 
-      {/* Departamentos */}
-      {/* <section className="section-padding bg-gradient-to-br from-gray-50 to-primary-50">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Departamentos
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Fale diretamente com o setor que pode melhor atendê-lo
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {departments.map((dept, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.8 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02 }}
-                className="card p-8"
-              >
-                <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mb-6">
-                  <dept.icon className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  {dept.title}
-                </h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  {dept.description}
-                </p>
-                <p className="text-primary-600 font-medium">
-                  {dept.contact}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
-      {/* Formulário de Contato */}
-      {/* <section className="section-padding bg-white">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Envie sua Mensagem
-            </h2>
-            <p className="text-lg text-gray-600">
-              Preencha o formulário abaixo e entraremos em contato em breve
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            viewport={{ once: true }}
-            className="card p-8"
-          >
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="nome" className="block text-sm font-medium text-gray-700 mb-2">
-                    Nome Completo *
-                  </label>
-                  <input
-                    type="text"
-                    id="nome"
-                    name="nome"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                    placeholder="Seu nome completo"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    E-mail *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                    placeholder="seu@email.com"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="telefone" className="block text-sm font-medium text-gray-700 mb-2">
-                    Telefone
-                  </label>
-                  <input
-                    type="tel"
-                    id="telefone"
-                    name="telefone"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                    placeholder="(48) 99999-9999"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="assunto" className="block text-sm font-medium text-gray-700 mb-2">
-                    Assunto *
-                  </label>
-                  <select
-                    id="assunto"
-                    name="assunto"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  >
-                    <option value="">Selecione um assunto</option>
-                    <option value="informacoes">Informações Gerais</option>
-                    <option value="apoio">Apoio às Famílias</option>
-                    <option value="voluntariado">Voluntariado</option>
-                    <option value="doacao">Doações</option>
-                    <option value="outro">Outro</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="mensagem" className="block text-sm font-medium text-gray-700 mb-2">
-                  Mensagem *
-                </label>
-                <textarea
-                  id="mensagem"
-                  name="mensagem"
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-vertical"
-                  placeholder="Escreva sua mensagem aqui..."
-                ></textarea>
-              </div>
-
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold py-4 px-8 rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 flex items-center justify-center gap-3"
-              >
-                <Send className="h-5 w-5" />
-                Enviar Mensagem
-              </motion.button>
-            </form>
-          </motion.div>
-        </div>
-      </section> */}
-
       {/* Mapa e Localização */}
       <section className="section-padding bg-gradient-to-br from-gray-50 to-primary-50">
         <div className="max-w-7xl mx-auto">
@@ -322,7 +356,7 @@ export default function Contatos() {
                     <div>
                       <p className="font-medium text-gray-900">Endereço:</p>
                       <p className="text-gray-600">Rua Nove de Julho, 900 - Ipiranga</p>
-                      <p className="text-gray-600">São José - Santa catarina</p>
+                      <p className="text-gray-600">São José - Santa Catarina</p>
                       <p className="text-gray-600">CEP: 88111-380</p> 
                     </div>
                   </div>
@@ -335,19 +369,70 @@ export default function Contatos() {
                     </div>
                   </div>
                 </div>
+                
+              <div className="mt-6 flex flex-col sm:flex-row gap-3">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="mt-6 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300"
+                  onClick={openGoogleMaps}
+                  className="bg-gradient-to-r from-blue-200 to-green-500 hover:from-blue-400 hover:to-green-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  Ver no Google Maps
+                  <img src="contatos/google-icon.svg" alt="Google" className="h-4 w-4" />
+                  Google Maps
+                </motion.button>
+                
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={openAppleMaps}
+                  className="bg-gradient-to-r from-gray-500 to-gray-900 hover:from-gray-900 hover:to-black text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  <img src="contatos/apple-icon.svg" alt="Apple" className="h-4 w-4" />
+                  Apple Maps
                 </motion.button>
               </div>
-              <div className="bg-gray-200 rounded-lg h-80 flex items-center justify-center">
-                <p className="text-gray-500 text-center">
-                  Mapa interativo<br />
-                  <span className="text-sm">Integração com Google Maps</span>
-                </p>
+              
+              </div>
+              <div className="bg-gray-200 rounded-lg h-80 overflow-hidden relative">
+                <div 
+                  ref={mapRef} 
+                  className="w-full h-full"
+                  style={{ minHeight: '320px' }}
+                />
+                {/* Fallback quando o mapa não carrega */}
+                {(mapError || !mapLoaded) && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg">
+                    <div className="text-center p-8">
+                      <MapPin className="h-16 w-16 text-blue-500 mx-auto mb-4" />
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                        Localização
+                      </h3>
+                      <p className="text-gray-600 mb-4">
+                        Rua Nove de Julho, 900 - Ipiranga<br />
+                        São José - Santa Catarina<br />
+                        CEP: 88111-380
+                      </p>
+                      <div className="flex flex-col gap-2">
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={openGoogleMaps}
+                          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300"
+                        >
+                          Ver no Google Maps
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={openAppleMaps}
+                          className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300"
+                        >
+                          Ver no Apple Maps
+                        </motion.button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
