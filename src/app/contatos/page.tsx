@@ -4,11 +4,25 @@ import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Users, Heart } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
+// Declaração de tipos para Leaflet
+declare global {
+  interface Window {
+    L: any;
+  }
+}
+
+// Tipo para a instância do mapa
+interface MapInstance {
+  remove: () => void;
+  setView: (coords: [number, number], zoom: number) => void;
+  whenReady: (callback: () => void) => void;
+}
+
 export default function Contatos() {
-  const mapRef = useRef(null)
+  const mapRef = useRef<HTMLDivElement>(null)
   const [mapLoaded, setMapLoaded] = useState(false)
   const [mapError, setMapError] = useState(false)
-  const mapInstanceRef = useRef(null)
+  const mapInstanceRef = useRef<MapInstance | null>(null)
 
   const contactInfo = [
     {
@@ -68,7 +82,7 @@ export default function Contatos() {
           }
 
           // Coordenadas para São José - SC (Rua Nove de Julho, 900)
-          const coordinates = [-27.5969, -48.6394] // [lat, lng] para Leaflet
+          const coordinates: [number, number] = [-27.5969, -48.6394] // [lat, lng] para Leaflet
 
           // Criar o mapa
           const map = window.L.map(mapRef.current, {
@@ -165,7 +179,7 @@ export default function Contatos() {
               if (data && data.length > 0) {
                 const lat = parseFloat(data[0].lat)
                 const lng = parseFloat(data[0].lon)
-                const precisCoordinates = [lat, lng]
+                const precisCoordinates: [number, number] = [lat, lng]
                 
                 // Atualizar posição do mapa e marcador
                 map.setView(precisCoordinates, 16)
@@ -179,7 +193,7 @@ export default function Contatos() {
           }
 
           // Salvar referência do mapa
-          mapInstanceRef.current = map
+          mapInstanceRef.current = map as MapInstance
 
           // Aguardar carregamento do mapa
           map.whenReady(() => {
@@ -370,29 +384,29 @@ export default function Contatos() {
                   </div>
                 </div>
                 
-              <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={openGoogleMaps}
-                  className="bg-gradient-to-r from-blue-200 to-green-500 hover:from-blue-400 hover:to-green-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <img src="contatos/google-icon.svg" alt="Google" className="h-4 w-4" />
-                  Google Maps
-                </motion.button>
-                
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={openAppleMaps}
-                  className="bg-gradient-to-r from-gray-500 to-gray-900 hover:from-gray-900 hover:to-black text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <img src="contatos/apple-icon.svg" alt="Apple" className="h-4 w-4" />
-                  Apple Maps
-                </motion.button>
+                <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={openGoogleMaps}
+                    className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    <img src="contatos/google-icon.svg" alt="Google" className="h-4 w-4" />
+                    Google Maps
+                  </motion.button>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={openAppleMaps}
+                    className="bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    <img src="contatos/apple-icon.svg" alt="Apple" className="h-4 w-4" />
+                    Apple Maps
+                  </motion.button>
+                </div>
               </div>
               
-              </div>
               <div className="bg-gray-200 rounded-lg h-80 overflow-hidden relative">
                 <div 
                   ref={mapRef} 
