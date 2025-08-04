@@ -80,13 +80,19 @@ export default function Sobre() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-              Nossa História de{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
-                Amor e Inclusão
-              </span>
-            </h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                viewport={{ once: true }}
+                className=" text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+              >
+                Sobre a{' '}
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Associação Amigo Down
+                </span>
+              </motion.h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mt-7">
               Há mais de 30 anos, a Associação Amigo Down dedica-se ao apoio integral
               de crianças com síndrome de Down e suas famílias, construindo um futuro
               mais inclusivo e acolhedor para todos.
@@ -183,40 +189,40 @@ export default function Sobre() {
                 </h1> */}
 
                 <div className="text-[1.3 rem] text-gray-700 max-w-4xl mx-auto space-y-6 text-justify">
-                  <p className="indent-8">
-                    Há mais de 30 anos, a <strong>Associação Amigo Down (AAD)</strong> é um espaço de amor, acolhimento e transformação.
-                    Nosso propósito é oferecer atendimento clínico, terapias integrativas e atividades que promovem saúde, bem-estar e inclusão
-                    social para pessoas com síndrome de Down (T21) — desde a primeira infância até a vida adulta.
-                  </p>
-
-                  <p className="indent-8">
-                    Somos mais do que uma associação. Somos uma <strong>família ampliada</strong>, onde cada história é respeitada, cada conquista é
-                    celebrada e cada desafio é enfrentado com coragem, afeto e profissionalismo.
-                    Atuamos como <strong>Centro de Atendimento Especializado (CAESP)</strong>, conveniados com a Fundação Catarinense de Educação
-                    Especial, garantindo <strong>suporte gratuito e qualificado</strong> a todos que atendemos.
-                  </p>
-
-                  <p className="indent-8">
-                    Nosso trabalho abrange diversas frentes, como:
-                  </p>
-
-                  <ul className="list-disc text-left pl-8 space-y-2">
-                    <li><strong>Estimulação precoce</strong> para crianças de 0 a 6 anos;</li>
-                    <li><strong>Fonoaudiologia</strong>, <strong>fisioterapia</strong> e <strong>terapia ocupacional</strong> especializadas;</li>
-                    <li><strong>Psicologia</strong> e apoio emocional individualizado;</li>
-                    <li><strong>Serviço de Vivências Laborais</strong>, promovendo autonomia e inclusão no mercado de trabalho;</li>
-                    <li><strong>Atendimento Educacional Especializado (AEE)</strong>, com estratégias adaptadas para inclusão escolar;</li>
-                    <li><strong>Programa Cuidando de Quem Cuida</strong>, com suporte emocional e rodas de conversa para mães e familiares.</li>
-                  </ul>
-
-                  <p className="indent-8">
-                    Acreditamos que <strong>a inclusão começa com empatia</strong>, e que cada adaptação, cada gesto de carinho, pode abrir portas
-                    para um mundo mais justo, acessível e transformador. Lutamos diariamente para derrubar barreiras, construindo
-                    <strong> pontes entre o amor e a oportunidade</strong>.
+                  <p>
+                    <strong>Fundada em 21 de setembro de 1991</strong>, a Associação Amigo Down é uma entidade beneficente e sem fins lucrativos que nasceu com uma missão revolucionária: trabalhar pelo desenvolvimento pleno e pela integração social de pessoas com síndrome de Down, promovendo o respeito à sua cidadania e dignidade. Reconhecida como utilidade pública nos níveis municipal, estadual e federal, construímos ao longo de mais de três décadas uma trajetória sólida de dedicação e transformação social.
                   </p>
 
                   <p>
-                    Seja como voluntário, parceiro ou doador, você também pode fazer parte dessa <strong>rede de afeto e transformação</strong>.
+                    Nossa história começou com 22 associados fundadores e uma visão inovadora para a época: enxergar além dos estereótipos e reconhecer o potencial único de cada pessoa com síndrome de Down. Hoje, somos referência estadual no atendimento especializado, atendendo adolescentes, jovens e adultos com síndrome de Down e suas famílias de toda Sa nta Catarina.
+                  </p>
+
+                  <p>
+                    Contamos com uma equipe multiprofissional altamente qualificada que inclui pediatra cardiologista, geneticista, endocrinologista, odontóloga, fonoaudiólogas, advogada, assistente social, psicopedagoga e professores especializados. Nossa estrutura física dispõe de consultório geral, consultório multidisciplinar e consultório odontológico, proporcionando atendimento integral e humanizado.
+                  </p>
+
+                  <p>
+                    Desenvolvemos um amplo programa de atividades educativas, culturais e terapêuticas que incluem aulas de dança, zumba, percussão, natação em parceria com a APABB, culinária e jogos pedagógicos. Destaque especial para nosso projeto da <strong>minicasa</strong>, um ambiente que simula um lar completo onde trabalhamos o desenvolvimento da autonomia doméstica dos associados.
+                  </p>
+
+                  <p>
+                    O <strong>Mutirão da Saúde</strong>, realizado mensalmente na última quarta-feira do mês, é um dos nossos principais programas, oferecendo atendimento especializado para pacientes encaminhados por Secretarias Municipais de Saúde de todo o Estado. Este evento proporciona atenção integral à saúde, além de acolhimento, orientação e assistência jurídica às famílias. Complementarmente, mantemos parceria para consultas especializadas em genética no Hospital Infantil Joana de Gusmão, em Florianópolis.
+                  </p>
+
+                  <p>
+                    <strong>Todas as nossas atividades são gratuitas</strong> e desenvolvidas por uma equipe totalmente voluntária. Nossa atuação complementa o Sistema Único de Saúde, oferecendo atendimentos especializados de média complexidade. Atendemos São José, Florianópolis, Palhoça, Santo Amaro da Imperatriz, Biguaçu e recebemos famílias de todo o Estado de Santa Catarina.
+                  </p>
+
+                  <p>
+                    Participamos ativamente da construção de políticas públicas através de nossa representação no Conselho Municipal e Estadual da Pessoa com Deficiência. Integramos também a Federação Catarinense das Associações com Síndrome de Down (Fecasd) e somos federados à Federação Brasileira (Febasd), fortalecendo o movimento nacional pelos direitos das pessoas com deficiência.
+                  </p>
+
+                  <p>
+                    Nosso compromisso vai além do atendimento: combatemos ativamente os preconceitos e estereótipos através de ações educativas e de conscientização. Acreditamos firmemente que cada pessoa com síndrome de Down possui personalidade própria e potencial único, e que, quando adequadamente estimulada, pode alcançar plena autonomia e participação social.
+                  </p>
+
+                  <p>
+                    Defendemos uma sociedade inclusiva onde pessoas com síndrome de Down sejam reconhecidas por suas capacidades, não por suas limitações. Nossa missão é estimular, educar e apoiar desde cedo para que se tornem cidadãos independentes e participativos, longe de rótulos que restringem suas possibilidades de desenvolvimento e realização pessoal.
                   </p>
 
                   <p className="text-center text-2xl font-semibold mt-8 text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-secondary-500 to-primary-600 bg-[length:200%_200%] animate-text-gradient-x">
