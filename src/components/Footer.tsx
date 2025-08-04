@@ -10,7 +10,7 @@ export default function Footer() {
     { href: '/', label: 'Home' },
     { href: '/sobre', label: 'Sobre' },
     { href: '/doe', label: 'Doe Agora' },
-    { href: '/transparencia', label: 'Transparência' },
+    // { href: '/transparencia', label: 'Transparência' },
   ]
 
   const socialLinks = [

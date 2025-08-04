@@ -12,7 +12,7 @@ export default function Header() {
   const menuItems = [
     { href: '/', label: 'Home' },
     { href: '/sobre', label: 'Sobre' },
-    { href: '/transparencia', label: 'Transparência' },
+    // { href: '/transparencia', label: 'Transparência' },
     { href: '/contatos', label: 'Contatos' },
   ]
 

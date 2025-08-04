@@ -140,14 +140,9 @@ export default function Contatos() {
                 <strong>📍 Endereço:</strong><br>
                 Rua Nove de Julho, 900 - Ipiranga<br>
                 São José - Santa Catarina<br>
-                CEP: 88111-380
+              
               </div>
-              <div style="margin: 8px 0; font-size: 14px; color: #374151;">
-                <strong>📞 Telefone:</strong> (48) 99170-4881
-              </div>
-              <div style="margin: 8px 0; font-size: 14px; color: #374151;">
-                <strong>🕐 Horário:</strong> Segunda a Sexta: 8h às 18h
-              </div>
+              
               <div style="margin: 12px 0 0 0;">
                 <a 
                   href="https://www.google.com/maps/search/?api=1&query=Rua+Nove+de+Julho,+900+-+Ipiranga,+São+José+-+Santa+Catarina,+CEP:+88111-380" 
@@ -160,6 +155,22 @@ export default function Contatos() {
               </div>
             </div>
           `
+              /* 
+                endereço completo para o gps
+              <div style="margin: 8px 0; font-size: 14px; color: #374151;">
+                <strong>📍 Endereço:</strong><br>
+                Rua Nove de Julho, 900 - Ipiranga<br>
+                São José - Santa Catarina<br>
+                CEP: 88111-380
+              </div>
+              <div style="margin: 8px 0; font-size: 14px; color: #374151;">
+                <strong>📞 Telefone:</strong> (48) 99170-4881
+              </div>
+              <div style="margin: 8px 0; font-size: 14px; color: #374151;">
+                <strong>🕐 Horário:</strong> Segunda a Sexta: 8h às 18h
+              </div> */
+
+
 
           // Adicionar marcador
           const marker = window.L.marker(coordinates, { icon: customIcon })
