@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link';
 import { motion } from 'framer-motion'
 import { Heart, Users, Target, Award, Sparkles } from 'lucide-react'
 
@@ -124,17 +125,19 @@ export default function About() {
               transition={{ delay: 0.7, duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 relative overflow-hidden text-sm md:text-base"
-              >
-                <span className="relative z-10">Conheça Nossa História</span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              <Link href="/sobre" passHref>
+                <motion.button
                   whileHover={{ scale: 1.05 }}
-                />
-              </motion.button>
+                  whileTap={{ scale: 0.95 }}
+                  className="group bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full hover:shadow-xl hover:shadow-purple-500/25 transition-all duration-300 relative overflow-hidden text-sm md:text-base"
+                >
+                  <span className="relative z-10">Conheça Nossa História</span>
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    whileHover={{ scale: 1.05 }}
+                  />
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
 
