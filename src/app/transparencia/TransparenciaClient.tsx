@@ -271,7 +271,7 @@ export default function TransparenciaComponent() {
               Confira como utilizamos os recursos recebidos e nosso compromisso 
               com a responsabilidade fiscal
             </p>
-          </div> */}
+          </div>
 
           {/* Financial Summary Cards */}
           {/* <div className="grid md:grid-cols-3 gap-8 mb-12">

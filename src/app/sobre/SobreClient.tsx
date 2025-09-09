@@ -209,7 +209,6 @@ export default function Sobre() {
               >
                 Nosso compromisso vai além do atendimento: combatemos ativamente os preconceitos e estereótipos através de ações educativas e de conscientização. Acreditamos firmemente que cada pessoa com síndrome de Down possui personalidade própria e potencial único, e que, quando adequadamente estimulada, pode alcançar plena autonomia e participação social.
               </motion.p>
-
               <motion.p
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}

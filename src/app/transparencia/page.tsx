@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import TransparenciaComponent from '@/components/Transparencia'
+import TransparenciaClient from './TransparenciaClient'
 
 export const metadata: Metadata = {
   title: 'Transparência | Associação Amigo Down',
@@ -19,5 +19,5 @@ export const metadata: Metadata = {
 }
 
 export default function TransparenciaPage() {
-  return <TransparenciaComponent />
+  return <TransparenciaClient />
 }
