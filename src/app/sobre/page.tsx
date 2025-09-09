@@ -1,7 +1,14 @@
+import type { Metadata } from 'next'
 'use client'
 
 import Link from 'next/link';
 import { motion } from 'framer-motion'
+
+export const metadata: Metadata = {
+  title: 'Nossa História e Missão',
+  description: 'Conheça a história de mais de 30 anos da Associação Amigo Down, nossa equipe multiprofissional e a missão de promover inclusão e autonomia para pessoas com Síndrome de Down.',
+  keywords: ['história amigo down', 'missão', 'valores', 'equipe multiprofissional', 'inclusão social'],
+}
 
 export default function Sobre() {
   return (
