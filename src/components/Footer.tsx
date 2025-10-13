@@ -252,7 +252,7 @@ export default function Footer() {
           <p className="text-gray-200">
             Desenvolvido por{" "}
             <a
-              href="https://juniorpinho.dev"
+              href="https://juniorpinhodev.com.br"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-200 hover:underline transition-colors duration-200"
