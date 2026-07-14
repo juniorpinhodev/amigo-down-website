@@ -175,12 +175,12 @@ export default function Hero() {
       {/* Layout Desktop (mantido original) */}
       <motion.section 
         initial={{ 
-          backgroundPosition: 'center 120%',
+          backgroundPosition: '50% 120%',
           opacity: 0,
           scale: 1.1
         }}
         animate={{ 
-          backgroundPosition: 'center center',
+          backgroundPosition: '50% 50%',
           opacity: 1,
           scale: 1
         }}
