@@ -60,7 +60,7 @@ export default function RootLayout({
             "@type": "NGO",
             "name": "Associação Amigo Down",
             "url": "https://www.amigodown.org",
-            "logo": "https://www.amigodown.org/logoAmigoDown.svg",
+            "logo": "https://www.amigodown.org/Logo_AmigoDown35anos.jpeg",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "Rua Nove de Julho, 900",
