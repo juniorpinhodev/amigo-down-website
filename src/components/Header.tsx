@@ -12,9 +12,11 @@ export default function Header() {
   const menuItems = [
     { href: '/', label: 'Home' },
     { href: '/sobre', label: 'Sobre' },
+    { href: '/35-anos', label: '35 Anos' },
     // { href: '/transparencia', label: 'Transparência' },
     { href: '/contatos', label: 'Contatos' },
   ]
+
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-gray-100/90 backdrop-blur-lg shadow-lg border-b border-purple-100/20">
@@ -70,13 +72,19 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="relative text-gray-600 hover:text-accent-900 font-medium transition-all duration-300 group"
+                  className={`relative font-medium transition-all duration-300 group py-1.5 px-3 rounded-full ${
+                    item.href === '/35-anos'
+                      ? 'text-purple-700 hover:text-pink-600 font-semibold bg-purple-100/60 border border-purple-200/50'
+                      : 'text-gray-600 hover:text-accent-900'
+                  }`}
                 >
                   {item.label}
-                  <motion.div
-                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary-400 to-accent-600 group-hover:w-full transition-all duration-300"
-                    whileHover={{ width: "100%" }}
-                  />
+                  {item.href !== '/35-anos' && (
+                    <motion.div
+                      className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary-400 to-accent-600 group-hover:w-full transition-all duration-300"
+                      whileHover={{ width: "100%" }}
+                    />
+                  )}
                 </Link>
               </motion.div>
             ))}
@@ -135,7 +143,11 @@ export default function Header() {
                   >
                     <Link
                       href={item.href}
-                      className="block text-gray-700 hover:text-purple-600 font-medium py-2 hover:bg-purple-50 px-4 rounded-lg transition-all duration-300"
+                      className={`block font-medium py-2 px-4 rounded-lg transition-all duration-300 ${
+                        item.href === '/35-anos'
+                          ? 'text-purple-700 bg-purple-100/60 font-semibold border border-purple-200/30'
+                          : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50'
+                      }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.label}
